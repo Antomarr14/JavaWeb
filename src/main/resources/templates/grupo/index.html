@@ -1,0 +1,30 @@
+<html lang="en" xmlns:layout="http:www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layouts/_mainLayout" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<div layout:fragment="content">
+    <h1>Mi Web</h1>
+
+   <table class="table table-striped">
+       <tr>
+           <thead>
+           <th>Id</th>
+           <th>Nombre</th>
+           <th>Descripcion</th>
+           <th>Acciones</th>
+           </thead>
+           <tbody></tbody>
+       </tr>
+       <tbody>
+       <tr th:each="item : ${grupos}">
+           <td th:text="${item.id}"> </td>
+           <td th:text="${item.nombre}"></td>
+           <td th:text="${item.descripcion}"></td>
+           <td>
+               <a th:href="@{/grupos/details/{id} (id = ${item.id}) }">Ver</a>
+               <a  th:href="@{/grupos/edit/{id} (id = ${item.id}) }">Editar</a>
+               <a  th:href="@{/grupos/remove/{id} (id = ${item.id}) }">Eliminar</a>
+           </td>
+       </tr>
+       </tbody>
+   </table>
+</div>
