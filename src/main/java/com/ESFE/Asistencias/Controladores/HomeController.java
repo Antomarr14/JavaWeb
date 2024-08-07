@@ -10,6 +10,6 @@ public class HomeController {
 
     @GetMapping
     public String index(){
-        return "grupo/index";
+        return "home/index";
     }
 }
