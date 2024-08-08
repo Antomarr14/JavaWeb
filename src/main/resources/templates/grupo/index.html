@@ -1,30 +1,38 @@
-<html lang="en" xmlns:layout="http:www.ultraq.net.nz/thymeleaf/layout"
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="/layouts/_mainLayout" xmlns:th="http://www.w3.org/1999/xhtml">
 
-<div layout:fragment="content">
-    <h1>Mi Web</h1>
-    <a th:href="@{/grupo/create}" class="btn btn-primary mb-3">Crear nuevo grupo</a>
-   <table class="table table-striped">
-       <tr>
-           <thead>
-           <th>Id</th>
-           <th>Nombre</th>
-           <th>Descripcion</th>
-           <th>Acciones</th>
-           </thead>
-           <tbody></tbody>
-       </tr>
-       <tbody>
-       <tr th:each="item : ${grupos}">
-           <td th:text="${item.id}"> </td>
-           <td th:text="${item.nombre}"></td>
-           <td th:text="${item.descripcion}"></td>
-           <td>
-               <a th:href="@{/grupos/details/{id} (id = ${item.id}) }">Ver</a>
-               <a  th:href="@{/grupos/edit/{id} (id = ${item.id}) }">Editar</a>
-               <a  th:href="@{/grupos/remove/{id} (id = ${item.id}) }">Eliminar</a>
-           </td>
-       </tr>
-       </tbody>
-   </table>
+<head>
+    <title>Grupos</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<div layout:fragment="content" class="container mt-4">
+    <h1 class="mb-4">Grupos</h1>
+
+    <a th:href="@{/Grupos/create}" class="btn btn-primary mb-3">Crear nuevo grupo</a>
+
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${grupos}">
+            <td th:text="${item.id}"></td>
+            <td th:text="${item.nombre}"></td>
+            <td th:text="${item.descripcion}"></td>
+            <td>
+                <a th:href="@{/Grupos/details/{id}(id=${item.id})}" class="btn btn-info btn-sm">Ver</a>
+                <a th:href="@{/Grupos/edit/{id}(id=${item.id})}" class="btn btn-warning btn-sm">Editar</a>
+                <a th:href="@{/Grupos/remove/{id}(id=${item.id})}" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar este grupo?');">Eliminar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>
+
+</html>

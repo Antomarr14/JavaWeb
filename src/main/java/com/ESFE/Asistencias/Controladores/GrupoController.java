@@ -45,12 +45,14 @@ public class GrupoController {
         }
         return "grupo/index";
     }
+
     @GetMapping("/create")
     public String create(Model model) {
+        model.addAttribute("grupo", new Grupo());
         return "grupo/create";
     }
 
-    @PostMapping("/grupo/save")
+    @PostMapping("/save")
     public String save(Grupo grupo, BindingResult result, Model model, RedirectAttributes attributes) {
         if (result.hasErrors()) {
             model.addAttribute("grupo", grupo);
@@ -59,6 +61,53 @@ public class GrupoController {
         }
         grupoServices.CreaOeditar(grupo);
         attributes.addFlashAttribute("msg", "Creado Correctamente");
-        return "redirect:/grupos";
+        return "redirect:/Grupos";
     }
+
+    /*
+@GetMapping("/details/{id}")
+public String details(@PathVariable("id") Long id, Model model) {
+    Grupo grupo = grupoServices.BuscarPorId(id);
+    if (grupo == null) {
+        return "redirect:/Grupos";
+    }
+    model.addAttribute("grupo", grupo);
+    return "grupo/details";
+}
+
+@GetMapping("/edit/{id}")
+public String edit(@PathVariable("id") Long id, Model model) {
+    Grupo grupo = grupoServices.BuscarPorId(id);
+    if (grupo == null) {
+        return "redirect:/Grupos";
+    }
+    model.addAttribute("grupo", grupo);
+    return "grupo/edit";
+}
+
+@PostMapping("/update")
+public String update(Grupo grupo, BindingResult result, RedirectAttributes attributes) {
+    if (result.hasErrors()) {
+        attributes.addFlashAttribute("error", "No se puede actualizar debido a un error");
+        return "redirect:/Grupos/edit/" + grupo.getId();
+    }
+    grupoServices.CreaOeditar(grupo);
+    attributes.addFlashAttribute("msg", "Actualizado Correctamente");
+    return "redirect:/Grupos";
+}
+
+@GetMapping("/remove/{id}")
+public String remove(@PathVariable("id") Long id, RedirectAttributes attributes) {
+    try {
+        grupoServices.Eliminar(id);
+        attributes.addFlashAttribute("msg", "Eliminado Correctamente");
+    } catch (Exception e) {
+        attributes.addFlashAttribute("error", "No se pudo eliminar el grupo");
+    }
+    return "redirect:/Grupos";
+}
+*/
+
+
+
 }
