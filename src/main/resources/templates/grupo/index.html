@@ -28,7 +28,7 @@
             <td>
                 <a th:href="@{/Grupos/details/{id}(id=${item.id})}" class="btn btn-info btn-sm">Ver</a>
                 <a th:href="@{/Grupos/edit/{id}(id=${item.id})}" class="btn btn-warning btn-sm">Editar</a>
-                <a th:href="@{/Grupos/remove/{id}(id=${item.id})}" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar este grupo?');">Eliminar</a>
+                <a th:href="@{/Grupos/remove/{id}(id=${item.id})}" class="btn btn-danger btn-sm" >Eliminar</a>
             </td>
         </tr>
         </tbody>

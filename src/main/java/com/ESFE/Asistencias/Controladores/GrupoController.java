@@ -9,10 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -53,7 +50,7 @@ public class GrupoController {
     }
 
     @PostMapping("/save")
-    public String save(Grupo grupo, BindingResult result, Model model, RedirectAttributes attributes) {
+    public String save(@ModelAttribute Grupo grupo, BindingResult result, Model model, RedirectAttributes attributes) {
         if (result.hasErrors()) {
             model.addAttribute("grupo", grupo);
             attributes.addFlashAttribute("error", "No se puede guardar debido a un error");
@@ -64,50 +61,39 @@ public class GrupoController {
         return "redirect:/Grupos";
     }
 
-    /*
-@GetMapping("/details/{id}")
-public String details(@PathVariable("id") Long id, Model model) {
-    Grupo grupo = grupoServices.BuscarPorId(id);
-    if (grupo == null) {
+    @GetMapping("/details/{id}")
+    public String details(@PathVariable("id") Integer id, Model model) {
+        Optional<Grupo> grupoOpt = grupoServices.BuscarporId(id);
+        if (grupoOpt.isPresent()) {
+            Grupo grupo = grupoOpt.get();
+            model.addAttribute("grupo", grupo);
+            return "grupo/details";
+        } else {
+            return "grupo/not_found";
+        }
+    }
+
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable("id") Integer id, Model model) {
+        Grupo grupo = grupoServices.BuscarporId(id)
+                .orElseThrow(() -> new IllegalArgumentException("Grupo no encontrado: " + id));
+
+        model.addAttribute("grupo", grupo);
+        return "grupo/edit";
+    }
+
+    @GetMapping("/remove/{id}")
+    public String remove(@PathVariable("id") Integer id, Model model) {
+        Grupo grupo = grupoServices.BuscarporId(id)
+                .orElseThrow(() -> new IllegalArgumentException("Grupo no encontrado: " + id));
+        model.addAttribute("grupo", grupo);
+        return "grupo/delete";
+    }
+
+    @PostMapping("/delete")
+    public String delete(@ModelAttribute Grupo grupo, RedirectAttributes attributes) {
+        grupoServices.EliminarPorId(grupo.getId());
+        attributes.addFlashAttribute("msg", "Eliminado correctamente");
         return "redirect:/Grupos";
     }
-    model.addAttribute("grupo", grupo);
-    return "grupo/details";
-}
-
-@GetMapping("/edit/{id}")
-public String edit(@PathVariable("id") Long id, Model model) {
-    Grupo grupo = grupoServices.BuscarPorId(id);
-    if (grupo == null) {
-        return "redirect:/Grupos";
-    }
-    model.addAttribute("grupo", grupo);
-    return "grupo/edit";
-}
-
-@PostMapping("/update")
-public String update(Grupo grupo, BindingResult result, RedirectAttributes attributes) {
-    if (result.hasErrors()) {
-        attributes.addFlashAttribute("error", "No se puede actualizar debido a un error");
-        return "redirect:/Grupos/edit/" + grupo.getId();
-    }
-    grupoServices.CreaOeditar(grupo);
-    attributes.addFlashAttribute("msg", "Actualizado Correctamente");
-    return "redirect:/Grupos";
-}
-
-@GetMapping("/remove/{id}")
-public String remove(@PathVariable("id") Long id, RedirectAttributes attributes) {
-    try {
-        grupoServices.Eliminar(id);
-        attributes.addFlashAttribute("msg", "Eliminado Correctamente");
-    } catch (Exception e) {
-        attributes.addFlashAttribute("error", "No se pudo eliminar el grupo");
-    }
-    return "redirect:/Grupos";
-}
-*/
-
-
-
 }
