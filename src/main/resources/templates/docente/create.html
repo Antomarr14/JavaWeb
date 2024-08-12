@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="Layouts/_mainLayout">
+
+<head>
+    <title>Crear nuevo docente</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-control {
+            border-radius: 4px;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            border-color: #5a6268;
+        }
+        hr {
+            margin: 20px 0;
+        }
+    </style>
+</head>
+
+<body>
+<div layout:fragment="content">
+    <div class="container">
+        <h1>Crear nuevo docente</h1>
+        <form th:action="@{/Docentes/save}" th:object="${docente}" method="post">
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" class="form-control" th:field="*{nombre}" id="nombre" placeholder="Escriba el nombre del docente" required />
+            </div>
+            <div class="form-group">
+                <label for="apellido">Apellido</label>
+                <input type="text" class="form-control" th:field="*{apellido}" id="apellido" placeholder="Escriba el apellido del docente" required />
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" th:field="*{email}" id="email" placeholder="Escriba el email del docente" required />
+            </div>
+            <div class="form-group">
+                <label for="telefono">Teléfono</label>
+                <input type="text" class="form-control" th:field="*{telefono}" id="telefono" placeholder="Escriba el teléfono del docente" required />
+            </div>
+            <div class="form-group">
+                <label for="escuela">Escuela</label>
+                <input type="text" class="form-control" th:field="*{escuela}" id="escuela" placeholder="Escriba la escuela del docente" required />
+            </div>
+            <hr>
+            <div class="text-center">
+                <button type="submit" class="btn btn-outline-primary">Guardar</button>
+                <a th:href="@{/Docentes}" class="btn btn-outline-secondary">Regresar</a>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
