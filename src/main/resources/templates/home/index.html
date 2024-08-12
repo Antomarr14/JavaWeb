@@ -1,5 +1,56 @@
-<html lang="en" xmlns:layout="http:www.ultraq.net.nz/thymeleaf/layout"
-                        layout:decorate="/layouts/_mainLayout">
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layouts/_mainLayout">
+
+<head>
+    <title>Bienvenido</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+        .welcome-container {
+            text-align: center;
+            padding: 50px;
+            background-color: #ffffff;
+            max-width: 600px;
+            margin: 100px auto;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        .welcome-container h1 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            color: #343a40;
+        }
+        .welcome-container p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            color: #6c757d;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
 <div layout:fragment="content">
-    <h1>Bienvenido</h1>
+    <div class="welcome-container">
+        <h1>Bienvenide</h1>
+        <p>Haz clic en el botón a continuación para ver la lista de grupos.</p>
+        <a th:href="@{/Grupos}" class="btn btn-outline-primary">Ir a Grupos</a>
+    </div>
 </div>
+</body>
+</html>

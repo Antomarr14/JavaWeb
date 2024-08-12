@@ -37,7 +37,6 @@ public class GrupoController {
             List<Integer> pageNumber = IntStream.rangeClosed(1, totalPage)
                     .boxed()
                     .collect(Collectors.toList());
-
             model.addAttribute("pageNumber", pageNumber);
         }
         return "grupo/index";
@@ -56,8 +55,16 @@ public class GrupoController {
             attributes.addFlashAttribute("error", "No se puede guardar debido a un error");
             return "grupo/create";
         }
+
+        boolean isEdit = (grupo.getId() != null && grupoServices.BuscarporId(grupo.getId()).isPresent());
         grupoServices.CreaOeditar(grupo);
-        attributes.addFlashAttribute("msg", "Creado Correctamente");
+
+        if (isEdit) {
+            attributes.addFlashAttribute("msg", "Editado correctamente");
+        } else {
+            attributes.addFlashAttribute("msg", "Creado correctamente");
+        }
+
         return "redirect:/Grupos";
     }
 
@@ -65,8 +72,7 @@ public class GrupoController {
     public String details(@PathVariable("id") Integer id, Model model) {
         Optional<Grupo> grupoOpt = grupoServices.BuscarporId(id);
         if (grupoOpt.isPresent()) {
-            Grupo grupo = grupoOpt.get();
-            model.addAttribute("grupo", grupo);
+            model.addAttribute("grupo", grupoOpt.get());
             return "grupo/details";
         } else {
             return "grupo/not_found";
