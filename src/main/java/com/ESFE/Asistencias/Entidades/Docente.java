@@ -1,9 +1,11 @@
 package com.ESFE.Asistencias.Entidades;
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "docentes")
@@ -29,6 +31,16 @@ public class Docente {
     @NotBlank(message = "Ingrese la escuela del docente")
     private String escuela;
 
+    @ManyToMany
+    @JoinTable(
+            name = "docentes_grupos",
+            joinColumns = @JoinColumn(name = "docente_id"),
+            inverseJoinColumns = @JoinColumn(name = "grupo_id")
+    )
+    private Set<Grupo> grupos = new HashSet<>();
+
+    // Getters and Setters
+
     public Integer getId() {
         return id;
     }
@@ -37,43 +49,51 @@ public class Docente {
         this.id = id;
     }
 
-    public @NotBlank(message = "Ingrese el nombre del docente") String getNombre() {
+    public String getNombre() {
         return nombre;
     }
 
-    public void setNombre(@NotBlank(message = "Ingrese el nombre del docente") String nombre) {
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    public @NotBlank(message = "Ingrese el apellido del docente") String getApellido() {
+    public String getApellido() {
         return apellido;
     }
 
-    public void setApellido(@NotBlank(message = "Ingrese el apellido del docente") String apellido) {
+    public void setApellido(String apellido) {
         this.apellido = apellido;
     }
 
-    public @NotBlank(message = "Ingrese el email del docente") @Email(message = "Ingrese un email válido") String getEmail() {
+    public String getEmail() {
         return email;
     }
 
-    public void setEmail(@NotBlank(message = "Ingrese el email del docente") @Email(message = "Ingrese un email válido") String email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
-    public @NotBlank(message = "Ingrese el teléfono del docente") String getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(@NotBlank(message = "Ingrese el teléfono del docente") String telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
-    public @NotBlank(message = "Ingrese la escuela del docente") String getEscuela() {
+    public String getEscuela() {
         return escuela;
     }
 
-    public void setEscuela(@NotBlank(message = "Ingrese la escuela del docente") String escuela) {
+    public void setEscuela(String escuela) {
         this.escuela = escuela;
+    }
+
+    public Set<Grupo> getGrupos() {
+        return grupos;
+    }
+
+    public void setGrupos(Set<Grupo> grupos) {
+        this.grupos = grupos;
     }
 }

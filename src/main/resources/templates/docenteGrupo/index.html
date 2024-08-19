@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layouts/_mainLayout" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+  <title>Listado de Docente Grupos</title>
+  <!-- Include SweetAlert2 CDN for notifications -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+<div layout:fragment="content">
+
+  <!-- Mostrar mensajes de éxito -->
+  <div th:if="${msg != null}">
+    <script>
+      Swal.fire({
+          title: "Confirmación",
+          text: [[${msg}]],
+          icon: "success"
+      });
+    </script>
+  </div>
+
+  <!-- Mostrar mensajes de error -->
+  <div th:if="${error != null}">
+    <script>
+      Swal.fire({
+          title: "Error",
+          text: [[${error}]],
+          icon: "error"
+      });
+    </script>
+  </div>
+
+  <h1 class="text-center">Listado de Docente Grupos</h1>
+
+  <a th:href="@{/DocenteGrupos/create}" class="btn btn-primary my-3">Crear nuevo Docente Grupo</a>
+
+  <table class="table table-striped">
+    <thead class="table-dark">
+    <tr>
+      <th>ID</th>
+      <th>Docente</th>
+      <th>Grupo</th>
+      <th>Año</th>
+      <th>Ciclo</th>
+      <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="docenteGrupo : ${docenteGrupos}">
+      <td th:text="${docenteGrupo.id}"></td>
+      <td th:text="${docenteGrupo.docente.nombre}"></td>
+      <td th:text="${docenteGrupo.grupo.nombre}"></td>
+      <td th:text="${docenteGrupo.anio}"></td>
+      <td th:text="${docenteGrupo.ciclo}"></td>
+      <td class="d-grid gap-2 d-md-block">
+        <a th:href="@{/DocenteGrupos/details/{id}(id=${docenteGrupo.id})}" class="btn btn-primary">Ver</a>
+        <a th:href="@{/DocenteGrupos/edit/{id}(id=${docenteGrupo.id})}" class="btn btn-secondary">Editar</a>
+        <a th:href="@{/DocenteGrupos/remove/{id}(id=${docenteGrupo.id})}" class="btn btn-danger">Eliminar</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <nav class="page-navigation">
+    <ul class="pagination">
+      <li th:each="pageNumber : ${pageNumber}">
+        <a class="page-link" th:href="@{|/docenteGrupos?page=${pageNumber}|}" th:text="${pageNumber}"></a>
+      </li>
+    </ul>
+  </nav>
+
+  <a th:href="@{/}" class="btn btn-outline-primary">Volver al inicio</a>
+  <a th:href="@{/Grupos}" class="btn btn-outline-primary">Ir a Grupos</a>
+  <a th:href="@{/Docentes}" class="btn btn-outline-primary">Ir a Docentes</a>
+
+</div>
+</body>
+</html>
