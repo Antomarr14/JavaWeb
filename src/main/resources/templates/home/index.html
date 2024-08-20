@@ -4,6 +4,7 @@
 
 <head>
     <title>Bienvenido</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -11,16 +12,16 @@
         }
         .welcome-container {
             text-align: center;
-            padding: 50px;
+            padding: 40px;
             background-color: #ffffff;
             max-width: 600px;
             margin: 100px auto;
             border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         .welcome-container h1 {
             font-size: 2.5em;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             color: #343a40;
         }
         .welcome-container p {
@@ -28,18 +29,18 @@
             margin-bottom: 30px;
             color: #6c757d;
         }
-        .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
-            color: #fff;
-            padding: 10px 20px;
-            font-size: 1.2em;
+        .btn-primary, .btn-outline-primary {
+            font-size: 1.1em;
             border-radius: 5px;
-            text-decoration: none;
+            margin: 5px;
         }
-        .btn-primary:hover {
-            background-color: #0056b3;
-            border-color: #0056b3;
+        .btn-outline-primary {
+            border-color: #007bff;
+            color: #007bff;
+        }
+        .btn-outline-primary:hover {
+            background-color: #007bff;
+            color: #fff;
         }
     </style>
 </head>
@@ -47,12 +48,17 @@
 <body>
 <div layout:fragment="content">
     <div class="welcome-container">
-        <h1>Bienvenide</h1>
-        <p>Haz clic en el botón a continuación para ver la lista de grupos.</p>
-        <a th:href="@{/Grupos}" class="btn btn-outline-primary">Ir a Grupos</a>
-        <a th:href="@{/Docentes}" class="btn btn-outline-primary">Ir a Docentes</a>
-        <a th:href="@{/DocenteGrupos}" class="btn btn-outline-primary">Ir a Docentes Grupos</a>
+        <h1>¡Bienvenido!</h1>
+        <p>Haz clic en los botones a continuación para navegar a las diferentes secciones.</p>
+        <div class="d-grid gap-2">
+            <a th:href="@{/Grupos}" class="btn btn-outline-primary">Grupos</a>
+            <a th:href="@{/Docentes}" class="btn btn-outline-primary">Docentes</a>
+            <a th:href="@{/DocenteGrupos}" class="btn btn-outline-primary">Docentes Grupos</a>
+            <a th:href="@{/Estudiantes}" class="btn btn-outline-primary">Estudiantes</a>
+            <a th:href="@{/EstudianteGrupos}" class="btn btn-outline-primary">Estudiante Grupos</a>
+        </div>
     </div>
 </div>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
