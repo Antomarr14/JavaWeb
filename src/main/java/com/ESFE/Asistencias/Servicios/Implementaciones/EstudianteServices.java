@@ -41,4 +41,9 @@ public class EstudianteServices implements IEstudianteServices {
     public void EliminarPorId(Integer id) {
         estudianteRepository.deleteById(id);
     }
+
+    @Override
+    public Estudiante BuscarPorEmailYpin(String email, String pin) {
+        return estudianteRepository.findByEmailAndPin(email, pin);
+    }
 }

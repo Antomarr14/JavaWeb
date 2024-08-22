@@ -8,9 +8,16 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IEstudianteServices {
+
     Page<Estudiante> BuscarTodosPaginados(Pageable pageable);
+
     List<Estudiante> ObtenerTodos();
+
     Optional<Estudiante> BuscarporId(Integer id);
+
     Estudiante CreaOeditar(Estudiante estudiante);
+
     void EliminarPorId(Integer id);
+
+    Estudiante BuscarPorEmailYpin(String email, String pin);
 }

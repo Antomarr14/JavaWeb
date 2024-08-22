@@ -56,9 +56,9 @@
     <nav class="Page navegation example">
         <ul class="pagination">
             <li class="page-item" th:each="pageNumber : ${pageNumber}">
-              <a class="page-link" th:href="@{|/Grupos?page=${pageNumber}|}" th:text="${pageNumber}">
+                <a class="page-link" th:href="@{|/Grupos?page=${pageNumber}|}" th:text="${pageNumber}">
 
-              </a>
+                </a>
             </li>
         </ul>
     </nav>

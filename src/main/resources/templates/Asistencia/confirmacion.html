@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="Layouts/_mainLayout">
+
+<head>
+  <title>Confirmación de Asistencia</title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+    }
+    .container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .alert {
+        padding: 15px;
+        margin-bottom: 20px;
+        border: 1px solid transparent;
+        border-radius: 4px;
+    }
+    .alert-success {
+        color: #155724;
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+    }
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }
+  </style>
+</head>
+
+<body>
+<div layout:fragment="content">
+  <div class="container">
+    <h1>Confirmación de Asistencia</h1>
+
+    <!-- Mostrar mensaje de éxito -->
+    <div class="alert alert-success">
+      <p th:text="${msg}"></p>
+    </div>
+
+    <!-- Botón para volver al login -->
+    <div class="text-center">
+      <a href="/asistencias/login" class="btn btn-primary">Volver al Login</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

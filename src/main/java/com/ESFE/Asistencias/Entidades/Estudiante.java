@@ -3,7 +3,6 @@ package com.ESFE.Asistencias.Entidades;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -32,8 +31,11 @@ public class Estudiante {
             inverseJoinColumns = @JoinColumn(name = "grupo_id")
     )
     private Set<Grupo> grupos = new HashSet<>();
-    // Getters and Setters
 
+    @OneToMany(mappedBy = "estudiante", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Asistencia> asistencias = new HashSet<>();
+
+    // Getters y Setters
     public Integer getId() {
         return id;
     }
@@ -64,5 +66,21 @@ public class Estudiante {
 
     public void setPin(String pin) {
         this.pin = pin;
+    }
+
+    public Set<Grupo> getGrupos() {
+        return grupos;
+    }
+
+    public void setGrupos(Set<Grupo> grupos) {
+        this.grupos = grupos;
+    }
+
+    public Set<Asistencia> getAsistencias() {
+        return asistencias;
+    }
+
+    public void setAsistencias(Set<Asistencia> asistencias) {
+        this.asistencias = asistencias;
     }
 }
